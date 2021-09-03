@@ -1,0 +1,132 @@
+# Section 7, page 133, exercise 7-5
+
+# Creating sum of cost:
+order = 0
+
+# Creating tips for client, how choose him age for buying tickets to movie
+
+# First tip
+first_tip = ("\nTickets on this movie costs:"
+	"\n\tFor child to 3 years old, ticket for your child will cost free;"
+	"\n\tFor child at 3 years to 12 years old, ticket will cost 10 $;"
+	"\n\tFor human at 12 years old, ticket will cost 15 $."
+	"\n\t\t(If you need help - enter 'help',"
+	"\n\t\tfor watch, what you already choose - enter 'order',"
+	"\n\t\tfor delete all your order - enter 'del',"
+	"\n\t\tif you need quit - enter 'quit')"
+	"\n\tEnter your, or your partner, age in numbers: ")
+
+
+second_tip = ("\nThank you for your order!"
+	"\nDo you need something else at our list? ")
+
+third_tip = ('\nDo you need something else at our list? ')
+
+# Creating values for counting:
+persons_amount = 0
+order_amount = 0
+
+# For start to choose your tickets:
+
+hello = ("Hi, my name is Automatic Bot!"
+	"\nI can help you to make your choose for order tickets to our movie!"
+	"\nDo you want to start?"
+	"\n\t(For start - enter 'start') ")
+
+# If you write wrong word
+incorrect_1 = "Entered incorrect value! Please, enter 'sart'!"
+
+# First reqest:
+select = input(hello)
+
+# Starter procces
+while True:
+	if select == 'start':
+		activate = True
+		break
+	else:
+		select = input(incorrect_1)
+		continue
+
+# second request
+select = input(first_tip)
+
+# Main_process:
+
+while activate:
+
+# If selected "quit"
+	if select == 'quit':
+		activate = False
+	
+# If selected "help"
+	elif select == 'help':
+		select = input(first_tip)
+		continue
+
+# If you want to delete all order
+	elif select == 'del':
+		order = 0
+		persons_amount = 0
+		order_amount = 0
+		select = input(first_tip)
+		continue
+		
+# If selected 'order'
+	elif select == 'order':
+		if persons_amount == 0 and order_amount == 0:
+			print("\nYou didn't choose anything!")
+			select = input(third_tip)
+			continue
+
+		elif persons_amount == 1 and order == 0:
+			print(f"\nYou choose tickets for {persons_amount} child, whict free to enter.")
+			select = input(third_tip)
+			continue
+
+		elif persons_amount > 1 and order == 0:
+			print(f"\nYou choose tickets for {persons_amount} children, whict free to enter.")
+			select = input(third_tip)
+			continue
+
+		elif persons_amount == 1 and order >=1:
+			print(f"\nYou choose tickets for {persons_amount} human, whict cost {order_amount}$.")
+			select = input(third_tip)
+			continue
+
+		elif persons_amount > 1 and order > 1:
+			print(f"\nYou choose tickets for {persons_amount} people, whict cost {order_amount}$.")
+			select = input(third_tip)
+			continue
+
+# Translate str in numbers
+	try:
+		select = int(select)
+
+		if select <= 0 or select > 120:
+			print("\nIncorrect value! Please, try again!")
+			select = input(first_tip)
+			continue
+
+		elif select <= 3:
+			select = input(second_tip)
+			persons_amount += 1
+			continue
+
+		elif select < 12:
+			order = 10
+			select = input(second_tip)
+			persons_amount += 1
+			order_amount += 10
+			continue
+
+		elif select > 12 and select < 120:
+			order = 15
+			select = input(second_tip)
+			persons_amount += 1
+			order_amount += 15
+			continue
+
+	except:
+		print("\nWrong value! Please, try again!")
+		select = input(first_tip)
